@@ -56,18 +56,20 @@ client.on("message", message => {
 
 //Card Data need to refactor and try to get it to stop looping on error...
  client.on('message',  msg => {
-
-  
   let prefix = '[card-info]'
-  const arg = msg.content.replace(prefix,"").trim()    
-  getData(arg)
-  
-  async function getData(arg){
-    let result = await cardInfo(arg)
-    if(result){
-      return msg.channel.send('```json\n' + result + '\n```')
-    }
 
+  if (msg.content.includes(prefix) && msg.content.length > prefix.length){
+    const arg = msg.content.replace(prefix,"").trim()    
+    getData(arg)
+    
+    async function getData(arg){
+      let result = await cardInfo(arg)
+      if(result){
+        return msg.channel.send('```json\n' + result + '\n```')
+      }
+  
+
+  }
 
   }})
   
